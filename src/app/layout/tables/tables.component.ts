@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { RestService } from './../../rest.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-tables',
@@ -8,7 +10,20 @@ import { routerTransition } from '../../router.animations';
     animations: [routerTransition()]
 })
 export class TablesComponent implements OnInit {
-    constructor() {}
+    constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
 
-    ngOnInit() {}
+
+  invoices:any = [];
+
+    ngOnInit() {
+      this.getProducts();
+    }
+
+  getProducts() {
+    this.invoices = [];
+    this.rest.getInvoices().subscribe((data: {}) => {
+      console.log(data);
+      this.invoices = data;
+    });
+  }
 }
