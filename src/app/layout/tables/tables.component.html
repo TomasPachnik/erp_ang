@@ -5,8 +5,8 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th>#</th>
-        <th>Invoice</th>
+        <th>Invoice number</th>
+        <th>Invoice name</th>
         <th>Customer</th>
         <th>Date of issue</th>
         <th>Due date</th>
@@ -16,13 +16,13 @@
       </thead>
       <tbody>
       <tr *ngFor="let i of invoices; let i=index;">
-        <th scope="row">1</th>
-        <td>{{i.invoiceNumber}}</td>
-        <td>{{i.supplier.address.name}}</td>
-        <td>{{i.dueDate}}</td>
-        <td>{{i.dateOfIssue}}</td>
-        <td>{{i.total}}</td>
-        <td>{{i.issuer.name}}</td>
+        <th scope="row">{{i.invoiceNumber}}</th>
+        <td>{{i.name}}</td>
+        <td>{{i.customer.name}}</td>
+        <td>{{i.dueDate | date: 'dd.MM.yyyy'}}</td>
+        <td>{{i.dateOfIssue | date: 'dd.MM.yyyy'}}</td>
+        <td>{{i.total}} {{i.currency}}</td>
+        <td>{{i.user.name}}</td>
       </tr>
       </tbody>
     </table>

@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { routerTransition } from '../../router.animations';
-import { RestService } from './../../rest.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {routerTransition} from '../../router.animations';
+import {RestService} from './../../rest.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-    selector: 'app-tables',
-    templateUrl: './tables.component.html',
-    styleUrls: ['./tables.component.scss'],
-    animations: [routerTransition()]
+  selector: 'app-tables',
+  templateUrl: './tables.component.html',
+  styleUrls: ['./tables.component.scss'],
+  animations: [routerTransition()]
 })
 export class TablesComponent implements OnInit {
-    constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) {
+  }
 
+  invoices: any = [];
 
-  invoices:any = [];
-
-    ngOnInit() {
-      this.getProducts();
-    }
+  ngOnInit() {
+    this.getProducts();
+  }
 
   getProducts() {
     this.invoices = [];
