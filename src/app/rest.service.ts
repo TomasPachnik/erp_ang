@@ -45,6 +45,12 @@ export class RestService {
     );
   }
 
+
+  getCustomers(): Observable<any> {
+    return this.http.get(endpoint + 'customers/').pipe(
+      map(this.extractData));
+  }
+
   addProduct(product): Observable<any> {
     console.log(product);
     return this.http.post<any>(endpoint + 'invoices', JSON.stringify(product), httpOptions).pipe(

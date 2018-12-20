@@ -1,0 +1,32 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Customers'" [icon]="'fa-table'"></app-page-header>
+  <div class="row">
+    <div class="col-xl-2">
+    </div>
+    <div class="col-xl-8">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Meno</th>
+            <th>IČO</th>
+            <th>DIČ</th>
+            <th>Obec</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let customer of customers; let i=index;">
+            <td><a [routerLink]="['/customer-detail/',customer.uuid]">{{customer.name}}</a></td>
+            <td>{{customer.companyIdentificationNumber}}</td>
+            <td>{{customer.taxIdentificationNumber}}</td>
+            <td>{{customer.address.town}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-xl-2">
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
