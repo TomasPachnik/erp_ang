@@ -10,7 +10,7 @@
         <div class="form-group">
           <label>Login</label>
           <input type="text" class="form-control" id="login" required [(ngModel)]="user.login" name="login"
-                 disabled placeholder="User login" #login="ngModel">
+                 placeholder="User login" #login="ngModel">
           <div [hidden]="login.valid || login.pristine" class="alert alert-danger">Login is required</div>
         </div>
 

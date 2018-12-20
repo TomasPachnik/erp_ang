@@ -23,7 +23,6 @@ export class UserDetailComponent implements OnInit {
 
   getUserDetail() {
     this.rest.getUser(this.route.snapshot.params['uuid']).subscribe((data: {}) => {
-      console.log(data);
       this.user = data;
     });
   }
