@@ -50,6 +50,12 @@ export class RestService {
       map(this.extractData));
   }
 
+  signIn(credentials): Observable<any> {
+    return this.http.post(endpoint + 'auth/signin', JSON.stringify(credentials), httpOptions).pipe(
+      map(this.extractData));
+  }
+
+
   getCustomers(): Observable<any> {
     return this.http.get(endpoint + 'customers/').pipe(
       map(this.extractData));
