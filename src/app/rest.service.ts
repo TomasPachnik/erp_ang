@@ -45,6 +45,10 @@ export class RestService {
     );
   }
 
+  removeUser(uuid): Observable<any> {
+    return this.http.get(endpoint + 'users/remove/' + uuid).pipe(
+      map(this.extractData));
+  }
 
   getCustomers(): Observable<any> {
     return this.http.get(endpoint + 'customers/').pipe(

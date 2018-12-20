@@ -18,7 +18,9 @@ export class UserDetailComponent implements OnInit {
   user: any = new UserDetail("", "", "", "", "");
 
   ngOnInit() {
-    this.getUserDetail();
+    if (this.route.snapshot.params['uuid'] !== undefined) {
+      this.getUserDetail();
+    }
   }
 
   getUserDetail() {

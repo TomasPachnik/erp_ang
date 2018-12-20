@@ -26,4 +26,16 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  newUser() {
+    this.router.navigate(['users/newUser']);
+  }
+
+  removeUser(uuid) {
+    if(confirm("Ste si istý?")) {
+      this.rest.removeUser(uuid).subscribe((data: {}) => {
+        this.getUsers();
+      });
+    }
+  }
+
 }
