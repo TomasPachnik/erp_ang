@@ -3,7 +3,7 @@ import {routerTransition} from '../../router.animations';
 import {RestService} from './../../rest.service';
 import {UserDetail} from './../../template/user-detail';
 import {ActivatedRoute, Router} from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -29,7 +29,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.user);
+    this.rest.updateUser(this.user).subscribe((data: {}) => {
+      this.router.navigate(['users']);
+    });
   }
 
 

@@ -39,9 +39,10 @@ export class RestService {
       map(this.extractData));
   }
 
-  getProduct(id): Observable<any> {
-    return this.http.get(endpoint + 'invoices/' + id).pipe(
-      map(this.extractData));
+  updateUser(user): Observable<any> {
+    return this.http.post(endpoint + 'users/save', JSON.stringify(user), httpOptions).pipe(
+      catchError(this.handleError<any>('updateUser'))
+    );
   }
 
   addProduct(product): Observable<any> {
