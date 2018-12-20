@@ -16,14 +16,15 @@ export class UsersComponent implements OnInit {
   users: any = [];
 
   ngOnInit() {
-    this.getProducts();
+    this.getUsers();
   }
 
-  getProducts() {
+  getUsers() {
     this.users = [];
     this.rest.getUsers().subscribe((data: {}) => {
       console.log(data);
       this.users = data;
     });
   }
+
 }

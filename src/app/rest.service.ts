@@ -34,6 +34,11 @@ export class RestService {
       map(this.extractData));
   }
 
+  getUser(uuid): Observable<any> {
+    return this.http.get(endpoint + 'users/' + uuid).pipe(
+      map(this.extractData));
+  }
+
   getProduct(id): Observable<any> {
     return this.http.get(endpoint + 'invoices/' + id).pipe(
       map(this.extractData));
