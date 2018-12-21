@@ -5,6 +5,7 @@ import {routerTransition} from '../router.animations';
 import {FormsModule} from '@angular/forms';
 import {Credentials} from "../template/credentials";
 import {RestService} from "../rest.service";
+import {Auth} from '../template/auth';
 
 @Component({
   selector: 'app-login',
@@ -31,16 +32,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.rest.signIn(this.credentials).subscribe((data: {}) => {
+    this.rest.signIn(this.credentials).subscribe((data: Auth) => {
       console.log(data);
 
       if (data.token === undefined) {
         console.log("wrong username/password");
       } else {
-        console.log(data.token);
         localStorage.setItem('token', data.token);
-        //localStorage.setItem('isLoggedin', 'true');
-        //redirect
+        this.router.navigate(['/']);
       }
     });
 

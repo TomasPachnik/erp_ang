@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgModule, ErrorHandler} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -10,6 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './shared';
 import {ErrorsHandler} from './shared';
+import {MyHttpInterceptor} from "./shared/http-interceptor/http.interceptor";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -42,6 +43,11 @@ export const createTranslateLoader = (http: HttpClient) => {
     {
       provide: ErrorHandler,
       useClass: ErrorsHandler,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyHttpInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
