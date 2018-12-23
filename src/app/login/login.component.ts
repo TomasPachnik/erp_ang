@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {Credentials} from "../template/credentials";
 import {RestService} from "../rest.service";
 import {Auth} from '../template/auth';
+import {UsernameRoles} from "../template/username-roles";
 
 @Component({
   selector: 'app-login',
@@ -33,15 +34,19 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.rest.signIn(this.credentials).subscribe((data: Auth) => {
-      console.log(data);
 
+      console.log(data);
       if (data.token === undefined) {
+
         console.log("wrong username/password");
       } else {
         localStorage.setItem('token', data.token);
-        this.router.navigate(['/']);
+        this.rest.me(this.credentials).subscribe((me: UsernameRoles) => {
+          console.log(me);
+          localStorage.setItem('roles', JSON.stringify(me.roles));
+          this.router.navigate(['/']);
+        });
       }
     });
-
   }
 }

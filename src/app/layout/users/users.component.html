@@ -13,6 +13,7 @@
             <th>Meno</th>
             <th>Email</th>
             <th>Telefón</th>
+            <th>Aktívny</th>
             <th></th>
           </tr>
           </thead>
@@ -22,7 +23,8 @@
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.phone}}</td>
-            <td><button (click)="removeUser(user.uuid)" class="btn btn-danger" type="button">Odstrániť</button></td>
+            <td><input type="checkbox" [(ngModel)]="user.enabled" disabled></td>
+            <td><button (click)="removeUser(user.uuid)" [disabled]="user.name == 'admin'" class="btn btn-danger" type="button">Odstrániť</button></td>
           </tr>
           </tbody>
         </table>

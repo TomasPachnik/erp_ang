@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {routerTransition} from '../../router.animations';
 import {RestService} from './../../rest.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-users',

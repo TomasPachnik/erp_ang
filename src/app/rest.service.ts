@@ -66,6 +66,10 @@ export class RestService {
       map(this.extractData));
   }
 
+  me(credentials): Observable<any> {
+    return this.http.get(endpoint + 'auth/me').pipe(
+      map(this.extractData));
+  }
 
   getCustomers(): Observable<any> {
     return this.http.get(endpoint + 'customers/').pipe(
