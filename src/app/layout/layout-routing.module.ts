@@ -14,6 +14,7 @@ const routes: Routes = [
       {path: 'users', loadChildren: './users/users.module#UsersModule'},
       {path: 'users/user-detail/:uuid', loadChildren: './user-detail/user-detail.module#UserDetailModule'},
       {path: 'users/newUser', loadChildren: './user-detail/user-detail.module#UserDetailModule'},
+      {path: 'user-settings', loadChildren: './user-settings/user-settings.module#UserSettingsModule'},
       {path: 'customers', loadChildren: './customers/customers.module#CustomersModule'},
       {path: 'forms', loadChildren: './form/form.module#FormModule'},
       {path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule'},

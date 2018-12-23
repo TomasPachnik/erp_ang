@@ -24,7 +24,7 @@
             <td>{{user.email}}</td>
             <td>{{user.phone}}</td>
             <td><input type="checkbox" [(ngModel)]="user.enabled" disabled></td>
-            <td><button (click)="removeUser(user.uuid)" [disabled]="user.name == 'admin'" class="btn btn-danger" type="button">Odstrániť</button></td>
+            <td><button (click)="removeUser(user.uuid)" [disabled]="user.login == 'admin'" class="btn btn-danger" type="button">Odstrániť</button></td>
           </tr>
           </tbody>
         </table>

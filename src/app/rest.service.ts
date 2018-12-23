@@ -47,7 +47,7 @@ export class RestService {
   }
 
   getUser(uuid): Observable<any> {
-    return this.http.get(endpoint + 'users/' + uuid).pipe(
+    return this.http.get(endpoint + 'users/get/' + uuid).pipe(
       map(this.extractData));
   }
 
@@ -56,9 +56,20 @@ export class RestService {
       map(this.extractData));
   }
 
+  getUserByToken(): Observable<any> {
+      return this.http.get(endpoint + 'users/getByToken').pipe(
+      map(this.extractData));
+  }
+
   updateUser(user): Observable<any> {
     return this.http.post(endpoint + 'users/save', JSON.stringify(user), httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  changePassword(password): Observable<any> {
+    return this.http.post(endpoint + 'users/changePassword', JSON.stringify(password), httpOptions).pipe(
+      catchError(this.handleError<any>('changePassword'))
     );
   }
 

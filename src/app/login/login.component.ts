@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       } else {
         localStorage.setItem('token', data.token);
         this.rest.me(this.credentials).subscribe((me: UsernameRoles) => {
-          this.rest.getUserByLogin(me.username).subscribe((user: UserDetail) => {
+          this.rest.getUserByToken().subscribe((user: UserDetail) => {
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('roles', JSON.stringify(me.roles));
             this.router.navigate(['/']);
