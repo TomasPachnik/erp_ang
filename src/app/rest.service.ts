@@ -10,7 +10,8 @@ const endpoint = (() => {
     return 'http://ec2-3-16-158-12.us-east-2.compute.amazonaws.com:5554/';
   } else {
     return 'http://localhost:8080/';
-  }})();
+  }
+})();
 
 
 //const endpoint = 'http://localhost:8080/';
@@ -47,6 +48,11 @@ export class RestService {
 
   getUser(uuid): Observable<any> {
     return this.http.get(endpoint + 'users/' + uuid).pipe(
+      map(this.extractData));
+  }
+
+  getUserByLogin(login): Observable<any> {
+    return this.http.get(endpoint + 'users/getByLogin/' + login).pipe(
       map(this.extractData));
   }
 

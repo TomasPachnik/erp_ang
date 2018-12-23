@@ -7,6 +7,7 @@ import {Credentials} from "../template/credentials";
 import {RestService} from "../rest.service";
 import {Auth} from '../template/auth';
 import {UsernameRoles} from "../template/username-roles";
+import {UserDetail} from "../template/user-detail";
 
 @Component({
   selector: 'app-login',
@@ -34,17 +35,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.rest.signIn(this.credentials).subscribe((data: Auth) => {
-
-      console.log(data);
       if (data.token === undefined) {
-
         console.log("wrong username/password");
       } else {
         localStorage.setItem('token', data.token);
         this.rest.me(this.credentials).subscribe((me: UsernameRoles) => {
-          console.log(me);
-          localStorage.setItem('roles', JSON.stringify(me.roles));
-          this.router.navigate(['/']);
+          this.rest.getUserByLogin(me.username).subscribe((user: UserDetail) => {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('roles', JSON.stringify(me.roles));
+            this.router.navigate(['/']);
+          });
         });
       }
     });
