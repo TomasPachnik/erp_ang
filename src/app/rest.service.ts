@@ -2,8 +2,19 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
 
-const endpoint = 'http://localhost:8080/';
+
+const endpoint = (() => {
+  if (environment.production) {
+    return 'http://ec2-3-16-158-12.us-east-2.compute.amazonaws.com:5554/';
+  } else {
+    return 'http://localhost:8080/';
+  }})();
+
+
+//const endpoint = 'http://localhost:8080/';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
