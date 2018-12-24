@@ -5,6 +5,7 @@
       <h1>ERP app</h1>
       <form #credentialsForm="ngForm" (ngSubmit)="onSubmit()" role="form">
         <div class="form-content">
+          <div [hidden]="errorMessage == null" class="alert alert-danger">{{errorMessage}}</div>
           <div class="form-group">
             <input type="text" class="form-control input-underline input-lg" id="username" name="username"
                    placeholder="{{ 'Login' | translate }}" #login="ngModel" [(ngModel)]="credentials.username">
@@ -17,7 +18,6 @@
         </div>
         <button type="submit" class="btn rounded-btn">{{ 'Log in' | translate }}</button>
         &nbsp;
-        <a class="btn rounded-btn" [routerLink]="['/signup']">{{ 'Register' | translate }}</a>
       </form>
     </div>
   </div>

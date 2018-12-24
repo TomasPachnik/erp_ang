@@ -29,24 +29,27 @@ export class LoginComponent implements OnInit {
   }
 
   credentials: any = new Credentials("", "");
+  errorMessage: string = null;
 
   ngOnInit() {
   }
 
   onSubmit() {
     this.rest.signIn(this.credentials).subscribe((data: Auth) => {
-      if (data.token === undefined) {
-        console.log("wrong username/password");
-      } else {
-        localStorage.setItem('token', data.token);
-        this.rest.me(this.credentials).subscribe((me: UsernameRoles) => {
-          this.rest.getUserByToken().subscribe((user: UserDetail) => {
-            localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('roles', JSON.stringify(me.roles));
-            this.router.navigate(['/']);
+        this.errorMessage = null;
+        if (data.token !== undefined) {
+          localStorage.setItem('token', data.token);
+          this.rest.me(this.credentials).subscribe((me: UsernameRoles) => {
+            this.rest.getUserByToken().subscribe((user: UserDetail) => {
+              localStorage.setItem('user', JSON.stringify(user));
+              localStorage.setItem('roles', JSON.stringify(me.roles));
+              this.router.navigate(['/']);
+            });
           });
-        });
-      }
-    });
+        }
+      },
+      error => {
+        this.errorMessage = error.error.message;
+      });
   }
 }

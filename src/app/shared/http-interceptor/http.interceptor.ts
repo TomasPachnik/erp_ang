@@ -27,13 +27,12 @@ export class MyHttpInterceptor implements HttpInterceptor {
     }
     return next.handle(authReq).pipe(tap(
       (err: any) => {
-        console.log(err);
         if (err instanceof HttpErrorResponse) {
-          console.log("auth error");
           if (err.status === 401 || err.status === 403) {
-            console.log("auth error");
             localStorage.setItem('token', null);
-            this.router.navigate(['/login']);
+            localStorage.setItem('user', null);
+            localStorage.setItem('roles', null);
+            this.router.navigate(['/']);
           }
         }
       }

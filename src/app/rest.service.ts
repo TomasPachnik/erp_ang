@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
 
@@ -38,95 +38,83 @@ export class RestService {
 
   getInvoices(): Observable<any> {
     return this.http.get(endpoint + 'invoices/').pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   getUsers(): Observable<any> {
     return this.http.get(endpoint + 'users/').pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   getUser(uuid): Observable<any> {
     return this.http.get(endpoint + 'users/get/' + uuid).pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   getUserByLogin(login): Observable<any> {
     return this.http.get(endpoint + 'users/getByLogin/' + login).pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   getUserByToken(): Observable<any> {
-      return this.http.get(endpoint + 'users/getByToken').pipe(
-      map(this.extractData));
+    return this.http.get(endpoint + 'users/getByToken').pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   updateUser(user): Observable<any> {
     return this.http.post(endpoint + 'users/save', JSON.stringify(user), httpOptions).pipe(
-      catchError(this.handleError<any>('updateUser'))
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
     );
   }
 
   changePassword(password): Observable<any> {
     return this.http.post(endpoint + 'users/changePassword', JSON.stringify(password), httpOptions).pipe(
-      catchError(this.handleError<any>('changePassword'))
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
     );
   }
 
   removeUser(uuid): Observable<any> {
     return this.http.get(endpoint + 'users/remove/' + uuid).pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   signIn(credentials): Observable<any> {
     return this.http.post(endpoint + 'auth/signin', JSON.stringify(credentials), httpOptions).pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   me(credentials): Observable<any> {
     return this.http.get(endpoint + 'auth/me').pipe(
-      map(this.extractData));
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
   }
 
   getCustomers(): Observable<any> {
     return this.http.get(endpoint + 'customers/').pipe(
-      map(this.extractData));
-  }
-
-  addProduct(product): Observable<any> {
-    console.log(product);
-    return this.http.post<any>(endpoint + 'invoices', JSON.stringify(product), httpOptions).pipe(
-      tap((product) => console.log(`added product w/ id=${product.id}`)),
-      catchError(this.handleError<any>('addProduct'))
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
     );
   }
 
-  updateProduct(id, product): Observable<any> {
-    return this.http.put(endpoint + 'invoices/' + id, JSON.stringify(product), httpOptions).pipe(
-      tap(_ => console.log(`updated product id=${id}`)),
-      catchError(this.handleError<any>('updateProduct'))
-    );
-  }
-
-  deleteProduct(id): Observable<any> {
-    return this.http.delete<any>(endpoint + 'invoices/' + id, httpOptions).pipe(
-      tap(_ => console.log(`deleted product id=${id}`)),
-      catchError(this.handleError<any>('deleteProduct'))
-    );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+  private handleError(error) {
+    return throwError(error);
   }
 
 }
