@@ -4,6 +4,7 @@
     <div class="col-xl-2">
     </div>
     <div class="col-xl-8">
+      <button (click)="newCustomer()" class="btn btn-primary" type="button">Nový zákazník</button>
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
@@ -12,14 +13,18 @@
             <th>IČO</th>
             <th>DIČ</th>
             <th>Obec</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let customer of customers; let i=index;">
-            <td><a [routerLink]="['/customer-detail/',customer.uuid]">{{customer.name}}</a></td>
+            <td><a [routerLink]="['/customers/customer-detail/',customer.uuid]">{{customer.name}}</a></td>
             <td>{{customer.companyIdentificationNumber}}</td>
             <td>{{customer.taxIdentificationNumber}}</td>
             <td>{{customer.address.town}}</td>
+            <td>
+              <button (click)="removeCustomer(customer.uuid)" class="btn btn-danger" type="button">Odstrániť</button>
+            </td>
           </tr>
           </tbody>
         </table>

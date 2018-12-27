@@ -1,0 +1,97 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'User settings'" [icon]="'fa-table'"></app-page-header>
+
+  <div class="row">
+    <div class="col-xl-3">
+    </div>
+    <div class="col-xl-6">
+
+      <!--
+       private String name;
+       private String companyIdentificationNumber;
+       private String taxIdentificationNumber;
+       private Address address;
+
+       private String street;
+       private String houseNumber;
+       private String postalCode;
+       private String town;
+       private String country;
+ -->
+
+      <form (ngSubmit)="onSubmit()" #customerForm="ngForm" role="form">
+        <div class="form-group">
+          <label>Meno</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="customer.name" name="name"
+                 placeholder="Meno" #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Meno je povinné</div>
+        </div>
+        <div class="form-group">
+          <label>IČO</label>
+          <input type="text" class="form-control" id="companyIdentificationNumber" required
+                 [(ngModel)]="customer.companyIdentificationNumber" name="companyIdentificationNumber"
+                 placeholder="IČO" #companyIdentificationNumber="ngModel">
+          <div [hidden]="companyIdentificationNumber.valid || companyIdentificationNumber.pristine"
+               class="alert alert-danger">IČO je povinné
+          </div>
+        </div>
+        <div class="form-group">
+          <label>DIČ</label>
+          <input type="text" class="form-control" id="taxIdentificationNumber" required
+                 [(ngModel)]="customer.taxIdentificationNumber" name="taxIdentificationNumber"
+                 placeholder="DIČ" #taxIdentificationNumber="ngModel">
+          <div [hidden]="taxIdentificationNumber.valid || taxIdentificationNumber.pristine" class="alert alert-danger">
+            DIČ je povinné
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ulica</label>
+          <input type="text" class="form-control" id="street" required [(ngModel)]="customer.address.street"
+                 name="address_street"
+                 placeholder="Ulica" #address_street="ngModel">
+          <div [hidden]="address_street.valid || address_street.pristine" class="alert alert-danger">Ulica je povinná
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Popisné číslo</label>
+          <input type="text" class="form-control" id="houseNumber" required [(ngModel)]="customer.address.houseNumber"
+                 name="address_houseNumber"
+                 placeholder="Popisné číslo" #address_houseNumber="ngModel">
+          <div [hidden]="address_houseNumber.valid || address_houseNumber.pristine" class="alert alert-danger">Popisné
+            číso je povinné
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Poštové smerovacie číslo</label>
+          <input type="text" class="form-control" id="postalCode" required [(ngModel)]="customer.address.postalCode"
+                 name="address_postalCode"
+                 placeholder="Poštové smerovacie číslo" #address_postalCode="ngModel">
+          <div [hidden]="address_postalCode.valid || address_postalCode.pristine" class="alert alert-danger">Poštové
+            smerovacie číso je povinné
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Obec</label>
+          <input type="text" class="form-control" id="town" required [(ngModel)]="customer.address.town"
+                 name="address_town"
+                 placeholder="Obec" #address_town="ngModel">
+          <div [hidden]="address_town.valid || address_town.pristine" class="alert alert-danger">Obec je povinná</div>
+        </div>
+        <div class="form-group">
+          <label>Štát</label>
+          <input type="text" class="form-control" id="country" required [(ngModel)]="customer.address.country"
+                 name="address_country"
+                 placeholder="Štát" #address_country="ngModel">
+          <div [hidden]="address_country.valid || address_country.pristine" class="alert alert-danger">Štát je povinný
+          </div>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-success" [disabled]="!customerForm.form.valid">Uložiť</button>
+
+      </form>
+
+    </div>
+    <div class="col-xl-3">
+    </div>
+  </div>
+</div>

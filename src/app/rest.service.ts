@@ -57,6 +57,13 @@ export class RestService {
     );
   }
 
+  getCustomer(uuid): Observable<any> {
+    return this.http.get(endpoint + 'customers/get/' + uuid).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
   getUserByLogin(login): Observable<any> {
     return this.http.get(endpoint + 'users/getByLogin/' + login).pipe(
       tap(_ => map(this.extractData)),
@@ -78,6 +85,13 @@ export class RestService {
     );
   }
 
+  updateCustomer(customer): Observable<any> {
+    return this.http.post(endpoint + 'customers/save', JSON.stringify(customer), httpOptions).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
   changePassword(password): Observable<any> {
     return this.http.post(endpoint + 'users/changePassword', JSON.stringify(password), httpOptions).pipe(
       tap(_ => map(this.extractData)),
@@ -87,6 +101,13 @@ export class RestService {
 
   removeUser(uuid): Observable<any> {
     return this.http.get(endpoint + 'users/remove/' + uuid).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
+  removeCustomer(uuid): Observable<any> {
+    return this.http.get(endpoint + 'customers/remove/' + uuid).pipe(
       tap(_ => map(this.extractData)),
       catchError(this.handleError)
     );
