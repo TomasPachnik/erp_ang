@@ -1,6 +1,6 @@
 import {Address} from "./address";
 
-export class Customer {
+export class Legal {
   name: string;
   companyIdentificationNumber: string;
   taxIdentificationNumber: string;

@@ -57,7 +57,7 @@ export class RestService {
     );
   }
 
-  getCustomer(uuid): Observable<any> {
+  getLegal(uuid): Observable<any> {
     return this.http.get(endpoint + 'customers/get/' + uuid).pipe(
       tap(_ => map(this.extractData)),
       catchError(this.handleError)
