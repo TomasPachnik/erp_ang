@@ -15,7 +15,8 @@ export class CustomerDetailComponent implements OnInit {
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) {
   }
 
-  customer: any = new Legal("", "", "", "", "", "", "", "");
+  customer: any = new Legal("", "", "",
+    "", "", "", "", "", "", "");
 
   ngOnInit() {
     if (this.route.snapshot.params['uuid'] !== undefined) {

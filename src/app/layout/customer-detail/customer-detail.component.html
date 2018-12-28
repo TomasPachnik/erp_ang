@@ -1,23 +1,10 @@
 <div [@routerTransition]>
-  <app-page-header [heading]="'User settings'" [icon]="'fa-table'"></app-page-header>
+  <app-page-header [heading]="'Customer detail'" [icon]="'fa-table'"></app-page-header>
 
   <div class="row">
     <div class="col-xl-3">
     </div>
     <div class="col-xl-6">
-
-      <!--
-       private String name;
-       private String companyIdentificationNumber;
-       private String taxIdentificationNumber;
-       private Address address;
-
-       private String street;
-       private String houseNumber;
-       private String postalCode;
-       private String town;
-       private String country;
- -->
 
       <form (ngSubmit)="onSubmit()" #customerForm="ngForm" role="form">
         <div class="form-group">
@@ -83,6 +70,22 @@
                  name="address_country"
                  placeholder="Štát" #address_country="ngModel">
           <div [hidden]="address_country.valid || address_country.pristine" class="alert alert-danger">Štát je povinný
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Banka</label>
+          <input type="text" class="form-control" id="bankName" required [(ngModel)]="customer.bankAccount.bankName"
+                 name="bankAccount_bankName"
+                 placeholder="Názov Banky" #bankAccount_bankName="ngModel">
+          <div [hidden]="bankAccount_bankName.valid || bankAccount_bankName.pristine" class="alert alert-danger">Názov banky je povinný
+          </div>
+        </div>
+        <div class="form-group">
+          <label>IBAN</label>
+          <input type="text" class="form-control" id="iban" required [(ngModel)]="customer.bankAccount.iban"
+                 name="bankAccount_iban"
+                 placeholder="IBAN" #bankAccount_iban="ngModel">
+          <div [hidden]="bankAccount_iban.valid || bankAccount_iban.pristine" class="alert alert-danger">IBAN je povinný
           </div>
         </div>
         <br/>
