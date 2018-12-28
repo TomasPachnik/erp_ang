@@ -16,6 +16,10 @@
       <i class="fa fa-fw fa-address-card"></i>&nbsp;
       <span>{{ 'Customers' | translate }}</span>
     </a>
+    <a [routerLink]="['/suppliers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-address-card"></i>&nbsp;
+      <span>{{ 'Suppliers' | translate }}</span>
+    </a>
     <a *ngIf="isAdminRole" [routerLink]="['/users']" [routerLinkActive]="['router-link-active']"
        class="list-group-item">
       <i class="fa fa-fw fa-address-book-o"></i>&nbsp;

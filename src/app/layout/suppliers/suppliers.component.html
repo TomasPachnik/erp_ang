@@ -1,0 +1,37 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Suppliers'" [icon]="'fa-table'"></app-page-header>
+  <div class="row">
+    <div class="col-xl-2">
+    </div>
+    <div class="col-xl-8">
+      <button (click)="newSupplier()" class="btn btn-primary" type="button">Nový poskytovateľ</button>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Meno</th>
+            <th>IČO</th>
+            <th>DIČ</th>
+            <th>Obec</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let supplier of suppliers; let i=index;">
+            <td><a [routerLink]="['/suppliers/supplier-detail/',supplier.uuid]">{{supplier.name}}</a></td>
+            <td>{{supplier.companyIdentificationNumber}}</td>
+            <td>{{supplier.taxIdentificationNumber}}</td>
+            <td>{{supplier.address.town}}</td>
+            <td>
+              <button (click)="removeSupplier(supplier.uuid)" class="btn btn-danger" type="button">Odstrániť</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-xl-2">
+    </div>
+  </div>
+  <!-- /.row -->
+</div>

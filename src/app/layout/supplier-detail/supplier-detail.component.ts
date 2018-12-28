@@ -6,33 +6,33 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customer-detail.component.html',
-  styleUrls: ['./customer-detail.component.scss'],
+  selector: 'app-suppliers',
+  templateUrl: './supplier-detail.component.html',
+  styleUrls: ['./supplier-detail.component.scss'],
   animations: [routerTransition()]
 })
-export class CustomerDetailComponent implements OnInit {
+export class SupplierDetailComponent implements OnInit {
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) {
   }
 
-  customer: any = new Legal("", "", "",
+  supplier: any = new Legal("", "", "",
     "", "", "", "", "", "", "");
 
   ngOnInit() {
     if (this.route.snapshot.params['uuid'] !== undefined) {
-      this.getCustomerDetail();
+      this.getSupplierDetail();
     }
   }
 
-  getCustomerDetail() {
+  getSupplierDetail() {
     this.rest.getCustomer(this.route.snapshot.params['uuid']).subscribe((data: {}) => {
-      this.customer = data;
+      this.supplier = data;
     });
   }
 
   onSubmit() {
-    this.rest.updateCustomer(this.customer).subscribe((data: {}) => {
-      this.router.navigate(['customers']);
+    this.rest.updateSupplier(this.supplier).subscribe((data: {}) => {
+      this.router.navigate(['suppliers']);
     });
   }
 

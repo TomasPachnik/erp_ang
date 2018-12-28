@@ -57,8 +57,15 @@ export class RestService {
     );
   }
 
-  getLegal(uuid): Observable<any> {
+  getCustomer(uuid): Observable<any> {
     return this.http.get(endpoint + 'customers/get/' + uuid).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
+  getSupplier(uuid): Observable<any> {
+    return this.http.get(endpoint + 'suppliers/get/' + uuid).pipe(
       tap(_ => map(this.extractData)),
       catchError(this.handleError)
     );
@@ -92,6 +99,13 @@ export class RestService {
     );
   }
 
+  updateSupplier(suppliers): Observable<any> {
+    return this.http.post(endpoint + 'suppliers/save', JSON.stringify(suppliers), httpOptions).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
   changePassword(password): Observable<any> {
     return this.http.post(endpoint + 'users/changePassword', JSON.stringify(password), httpOptions).pipe(
       tap(_ => map(this.extractData)),
@@ -113,6 +127,13 @@ export class RestService {
     );
   }
 
+  removeSupplier(uuid): Observable<any> {
+    return this.http.get(endpoint + 'suppliers/remove/' + uuid).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
   signIn(credentials): Observable<any> {
     return this.http.post(endpoint + 'auth/signin', JSON.stringify(credentials), httpOptions).pipe(
       tap(_ => map(this.extractData)),
@@ -129,6 +150,13 @@ export class RestService {
 
   getCustomers(): Observable<any> {
     return this.http.get(endpoint + 'customers/').pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
+  getSuppliers(): Observable<any> {
+    return this.http.get(endpoint + 'suppliers/').pipe(
       tap(_ => map(this.extractData)),
       catchError(this.handleError)
     );
