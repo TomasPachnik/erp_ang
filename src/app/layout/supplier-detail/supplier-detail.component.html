@@ -1,11 +1,9 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Supplier detail'" [icon]="'fa-table'"></app-page-header>
-
   <div class="row">
     <div class="col-xl-3">
     </div>
     <div class="col-xl-6">
-
       <form (ngSubmit)="onSubmit()" #supplierForm="ngForm" role="form">
         <div class="form-group">
           <label>Meno</label>
@@ -90,9 +88,7 @@
         </div>
         <br/>
         <button type="submit" class="btn btn-success" [disabled]="!supplierForm.form.valid">Uložiť</button>
-
       </form>
-
     </div>
     <div class="col-xl-3">
     </div>

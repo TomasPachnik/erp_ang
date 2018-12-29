@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
   }
 
   removeUser(uuid) {
-    if(confirm("Ste si istý?")) {
+    if (confirm("Ste si istý?")) {
       this.rest.removeUser(uuid).subscribe((data: {}) => {
         this.getUsers();
       });

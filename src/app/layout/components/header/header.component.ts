@@ -52,9 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLoggedout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('roles');
+    localStorage.clear();
   }
 
   changeLang(language: string) {

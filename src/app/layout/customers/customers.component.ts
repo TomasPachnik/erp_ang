@@ -23,8 +23,8 @@ export class CustomersComponent implements OnInit {
     this.router.navigate(['customers/newCustomer']);
   }
 
-  removeCustomer(uuid){
-    if(confirm("Ste si istý?")) {
+  removeCustomer(uuid) {
+    if (confirm("Ste si istý?")) {
       this.rest.removeCustomer(uuid).subscribe((data: {}) => {
         this.getCustomers();
       });

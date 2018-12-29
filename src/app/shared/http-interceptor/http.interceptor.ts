@@ -19,20 +19,22 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authReq = req;
-    if (localStorage.getItem('token') !== null) {
+    if (localStorage.getItem('token')) {
       // @ts-ignore
       authReq = req.clone({
         headers: req.headers.set('Authorization', "Bearer " + localStorage.getItem('token'))
       });
     }
     return next.handle(authReq).pipe(tap(
-      (err: any) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401 || err.status === 403) {
-            localStorage.setItem('token', null);
-            localStorage.setItem('user', null);
-            localStorage.setItem('roles', null);
+      (data: any) => {
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401 || error.status === 403) {
+            localStorage.clear();
             this.router.navigate(['/']);
+          }
+          if (error.status === 404) {
+            this.router.navigate(['/not-found']);
           }
         }
       }
