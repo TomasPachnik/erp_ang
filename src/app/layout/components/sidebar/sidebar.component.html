@@ -12,6 +12,10 @@
       <i class="fa fa-fw fa-table"></i>&nbsp;
       <span>{{ 'Tables' | translate }}</span>
     </a>
+    <a [routerLink]="['/invoices']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-table"></i>&nbsp;
+      <span>{{ 'Invoices' | translate }}</span>
+    </a>
     <a [routerLink]="['/customers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
       <i class="fa fa-fw fa-address-card"></i>&nbsp;
       <span>{{ 'Customers' | translate }}</span>

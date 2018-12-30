@@ -1,0 +1,31 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Invoices'" [icon]="'fa-table'"></app-page-header>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Invoice number</th>
+        <th>Invoice name</th>
+        <th>Customer</th>
+        <th>Date of issue</th>
+        <th>Due date</th>
+        <th>Price</th>
+        <th>Issuer</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of invoices; let i=index;">
+        <th scope="row">{{i.invoiceNumber}}</th>
+        <td>{{i.name}}</td>
+        <td>{{i.customer.name}}</td>
+        <td>{{i.dueDate | date: 'dd.MM.yyyy'}}</td>
+        <td>{{i.dateOfIssue | date: 'dd.MM.yyyy'}}</td>
+        <td>{{i.total}} {{i.currency}}</td>
+        <td>{{i.user.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
