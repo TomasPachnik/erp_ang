@@ -6,6 +6,8 @@ import {FormsModule} from '@angular/forms';
 import {Invoice} from "../../template/invoice";
 import {Legal} from "../../template/legal";
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {InvoiceExport} from "../../template/invoice-export";
+import {Asset} from "../../template/asset";
 
 @Component({
   selector: 'app-invoices',
@@ -55,10 +57,43 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.invoice);
-    /* this.rest.updateInvoice(this.invoice).subscribe((data: {}) => {
-       this.router.navigate(['invoices']);
-     });*/
+
+    let asset = new Asset(this.invoice.assetName, this.invoice.assetCount, this.invoice.assetUnit, this.invoice.assetUnitPrice);
+    console.log(this.invoice.dateOfIssue);
+    let assets = [asset];
+
+    let invoice = new InvoiceExport(
+      this.invoice.name,
+      this.invoice.invoiceNumber,
+      this.invoice.supplierVariableSymbol,
+      this.invoice.currency,
+      this.invoice.customer,
+      this.invoice.supplier,
+      this.mapDate(this.invoice.dateOfIssue),
+      this.mapDate(this.invoice.deliveryDate),
+      this.mapDate(this.invoice.dueDate),
+      assets);
+
+    console.log(invoice);
+
+    this.rest.updateInvoice(invoice).subscribe((data: {}) => {
+      this.router.navigate(['invoices']);
+    });
+  }
+
+  mapDate(date) {
+    let result = date.year + "";
+    result += "-";
+    if (date.month < 10) {
+      result += "0";
+    }
+    result += date.month;
+    result += "-";
+    if (date.day < 10) {
+      result += "0";
+    }
+    result += date.day;
+    return result;
   }
 
 }

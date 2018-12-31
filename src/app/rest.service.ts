@@ -92,6 +92,13 @@ export class RestService {
     );
   }
 
+  updateInvoice(invoice): Observable<any> {
+    return this.http.post(endpoint + 'invoices/save', JSON.stringify(invoice), httpOptions).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
   updateCustomer(customer): Observable<any> {
     return this.http.post(endpoint + 'customers/save', JSON.stringify(customer), httpOptions).pipe(
       tap(_ => map(this.extractData)),

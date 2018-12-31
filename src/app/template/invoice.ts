@@ -1,4 +1,3 @@
-import {Legal} from "./legal";
 
 export class Invoice {
   name: string;
