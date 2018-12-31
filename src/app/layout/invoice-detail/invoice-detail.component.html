@@ -1,0 +1,132 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Invoice detail'" [icon]="'fa-table'"></app-page-header>
+
+  <div class="row">
+    <div class="col-xl-3">
+    </div>
+    <div class="col-xl-6">
+
+      <form (ngSubmit)="onSubmit()" #invoiceForm="ngForm" role="form">
+        <div class="form-group">
+          <label>Názov</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="invoice.name" name="name"
+                 placeholder="Názov" #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Názov je povinný</div>
+        </div>
+        <div class="form-group">
+          <label>Číslo faktúry</label>
+          <input type="text" class="form-control" id="invoiceNumber" required [(ngModel)]="invoice.invoiceNumber"
+                 name="invoiceNumber"
+                 placeholder="Číslo faktúry" #invoiceNumber="ngModel">
+          <div [hidden]="invoiceNumber.valid || invoiceNumber.pristine" class="alert alert-danger">Číslo faktúry je
+            povinné
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Variabilný symbol</label>
+          <input type="text" class="form-control" id="supplierVariableSymbol" required
+                 [(ngModel)]="invoice.supplierVariableSymbol"
+                 name="supplierVariableSymbol"
+                 placeholder="Variabilný symbol" #supplierVariableSymbol="ngModel">
+          <div [hidden]="supplierVariableSymbol.valid || supplierVariableSymbol.pristine" class="alert alert-danger">
+            Variabilný symbol je povinný
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="currency">Mena:</label>
+          <select class="form-control" id="currency" name="currency" [(ngModel)]="invoice.currency">
+            <option value="€">€</option>
+            <option value="$">$</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="customer">Zákazník:</label>
+          <select class="form-control" id="customer" name="customer" [(ngModel)]="invoice.customer">
+            <option [value]="customer.uuid" *ngFor="let customer of customers">{{customer.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="supplier">Poskytovateľ:</label>
+          <select class="form-control" id="supplier" name="supplier" [(ngModel)]="invoice.supplier">
+            <option [value]="supplier.uuid" *ngFor="let supplier of suppliers">{{supplier.name}}</option>
+          </select>
+        </div>
+        <div class="input-group datepicker-input">
+          <label for="dateOfIssue">DateOfIssue:</label>
+          <input class="form-control" required placeholder="yyyy-mm-dd"
+                 name="dateOfIssue" id="dateOfIssue" [(ngModel)]="invoice.dateOfIssue" ngbDatepicker
+                 #d1="ngbDatepicker">
+          <button class="input-group-addon" (click)="d1.toggle()" type="button">
+            <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+            <span class="fa fa-calendar"></span>
+          </button>
+        </div>
+        <div class="input-group datepicker-input">
+          <label for="deliveryDate">deliveryDate:</label>
+          <input class="form-control" required placeholder="yyyy-mm-dd"
+                 name="deliveryDate" id="deliveryDate" [(ngModel)]="invoice.deliveryDate" ngbDatepicker
+                 #d2="ngbDatepicker">
+          <button class="input-group-addon" (click)="d2.toggle()" type="button">
+            <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+            <span class="fa fa-calendar"></span>
+          </button>
+        </div>
+        <div class="input-group datepicker-input">
+          <label for="dueDate">dueDate:</label>
+          <input class="form-control" required placeholder="yyyy-mm-dd"
+                 name="dueDate" id="dueDate" [(ngModel)]="invoice.dueDate" ngbDatepicker
+                 #d3="ngbDatepicker">
+          <button class="input-group-addon" (click)="d3.toggle()" type="button">
+            <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+            <span class="fa fa-calendar"></span>
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label>Názov položky:</label>
+          <input type="text" class="form-control" id="assetName" required
+                 [(ngModel)]="invoice.assetName" name="assetName" placeholder="Názov položky" #assetName="ngModel">
+          <div [hidden]="assetName.valid || assetName.pristine" class="alert alert-danger">
+            Názov položky je povinný
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Množstvo:</label>
+          <input type="text" class="form-control" id="assetCount" required
+                 [(ngModel)]="invoice.assetCount" name="assetCount" placeholder="Množstvo" #assetCount="ngModel">
+          <div [hidden]="assetCount.valid || assetCount.pristine" class="alert alert-danger">
+            Množstvo je povinné
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Jednotka:</label>
+          <input type="text" class="form-control" id="assetUnit" required
+                 [(ngModel)]="invoice.assetUnit" name="assetUnit" placeholder="Množstvo" #assetUnit="ngModel">
+          <div [hidden]="assetUnit.valid || assetUnit.pristine" class="alert alert-danger">
+            Jednotka je povinná
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Jednotková cena:</label>
+          <input type="text" class="form-control" id="assetUnitPrice" required
+                 [(ngModel)]="invoice.assetUnitPrice" name="assetUnitPrice" placeholder="Množstvo"
+                 #assetUnitPrice="ngModel">
+          <div [hidden]="assetUnitPrice.valid || assetUnitPrice.pristine" class="alert alert-danger">
+            Jednotková cena je povinná
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Poznámka:</label>
+          <input type="text" class="form-control" id="note" [(ngModel)]="invoice.note"
+                 name="note" placeholder="Poznámka" #note="ngModel">
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-success" [disabled]="!invoiceForm.form.valid">Uložiť</button>
+      </form>
+
+    </div>
+    <div class="col-xl-3">
+    </div>
+  </div>
+</div>

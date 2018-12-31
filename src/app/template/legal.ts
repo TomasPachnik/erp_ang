@@ -2,6 +2,7 @@ import {Address} from "./address";
 import {BankAccount} from "./bank-account";
 
 export class Legal {
+  uuid: string;
   name: string;
   companyIdentificationNumber: string;
   taxIdentificationNumber: string;

@@ -19,6 +19,10 @@ export class InvoicesComponent implements OnInit {
     this.getProducts();
   }
 
+  newInvoice() {
+    this.router.navigate(['invoices/newInvoice']);
+  }
+
   getProducts() {
     this.invoices = [];
     this.rest.getInvoices().subscribe((data: {}) => {
