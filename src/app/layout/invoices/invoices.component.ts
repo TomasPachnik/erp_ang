@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {routerTransition} from '../../router.animations';
 import {RestService} from './../../rest.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-invoices',
@@ -19,6 +20,14 @@ export class InvoicesComponent implements OnInit {
     this.getProducts();
   }
 
+  generateInvoice(uuid) {
+    this.rest.generateInvoice(uuid).subscribe((file: Blob) => {
+      const filename = "faktura.pdf";
+      FileSaver.saveAs(file, filename);
+    });
+
+  }
+
   newInvoice() {
     this.router.navigate(['invoices/newInvoice']);
   }
@@ -26,7 +35,6 @@ export class InvoicesComponent implements OnInit {
   getProducts() {
     this.invoices = [];
     this.rest.getInvoices().subscribe((data: {}) => {
-      console.log(data);
       this.invoices = data;
     });
   }

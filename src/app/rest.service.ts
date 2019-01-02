@@ -4,7 +4,6 @@ import {Observable, of, throwError} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
 
-
 const endpoint = (() => {
   if (environment.production) {
     return 'http://ec2-3-16-158-12.us-east-2.compute.amazonaws.com:5554/';
@@ -83,6 +82,12 @@ export class RestService {
       tap(_ => map(this.extractData)),
       catchError(this.handleError)
     );
+  }
+
+  generateInvoice(uuid): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get(endpoint + 'invoices/generate/' + uuid, {headers: headers, responseType: 'blob'});
   }
 
   updateUser(user): Observable<any> {
