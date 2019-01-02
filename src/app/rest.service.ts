@@ -27,6 +27,14 @@ const httpOptions = {
 
 export class RestService {
 
+
+  removeInvoice(uuid: any): any {
+    return this.http.get(endpoint + 'invoices/remove/' + uuid).pipe(
+      tap(_ => map(this.extractData)),
+      catchError(this.handleError)
+    );
+  }
+
   constructor(private http: HttpClient) {
   }
 

@@ -17,7 +17,7 @@ export class InvoicesComponent implements OnInit {
   invoices: any = [];
 
   ngOnInit() {
-    this.getProducts();
+    this.getInvoices();
   }
 
   generateInvoice(uuid) {
@@ -25,14 +25,21 @@ export class InvoicesComponent implements OnInit {
       const filename = "faktura.pdf";
       FileSaver.saveAs(file, filename);
     });
+  }
 
+  removeInvoice(uuid) {
+    if (confirm("Ste si istý?")) {
+      this.rest.removeInvoice(uuid).subscribe((data: {}) => {
+        this.getInvoices();
+      });
+    }
   }
 
   newInvoice() {
     this.router.navigate(['invoices/newInvoice']);
   }
 
-  getProducts() {
+  getInvoices() {
     this.invoices = [];
     this.rest.getInvoices().subscribe((data: {}) => {
       this.invoices = data;

@@ -57,18 +57,15 @@
                  name="dateOfIssue" id="dateOfIssue" [(ngModel)]="invoice.dateOfIssue" ngbDatepicker
                  #d1="ngbDatepicker">
           <button class="input-group-addon" (click)="d1.toggle()" type="button">
-            <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
             <span class="fa fa-calendar"></span>
           </button>
         </div>
-        {{invoice.dateOfIssue | json}}
         <div class="input-group datepicker-input">
           <label for="deliveryDate">deliveryDate:</label>
           <input class="form-control" required placeholder="yyyy-mm-dd"
                  name="deliveryDate" id="deliveryDate" [(ngModel)]="invoice.deliveryDate" ngbDatepicker
                  #d2="ngbDatepicker">
           <button class="input-group-addon" (click)="d2.toggle()" type="button">
-            <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
             <span class="fa fa-calendar"></span>
           </button>
         </div>
@@ -78,7 +75,6 @@
                  name="dueDate" id="dueDate" [(ngModel)]="invoice.dueDate" ngbDatepicker
                  #d3="ngbDatepicker">
           <button class="input-group-addon" (click)="d3.toggle()" type="button">
-            <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
             <span class="fa fa-calendar"></span>
           </button>
         </div>

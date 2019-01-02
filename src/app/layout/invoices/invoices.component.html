@@ -15,6 +15,7 @@
         <th>Price</th>
         <th>Issuer</th>
         <th></th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -26,7 +27,8 @@
         <td>{{i.dateOfIssue | date: 'dd.MM.yyyy'}}</td>
         <td>{{i.total}} {{i.currency}}</td>
         <td>{{i.user.name}}</td>
-        <button (click)="generateInvoice(i.uuid)" class="btn btn-danger" type="button">PDF</button>
+        <button (click)="generateInvoice(i.uuid)" class="btn btn-success" type="button">PDF</button>
+        <button (click)="removeInvoice(i.uuid)" class="btn btn-danger" type="button">Delete</button>
       </tr>
       </tbody>
     </table>

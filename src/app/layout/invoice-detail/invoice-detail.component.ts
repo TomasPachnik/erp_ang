@@ -59,7 +59,6 @@ export class InvoiceDetailComponent implements OnInit {
   onSubmit() {
 
     let asset = new Asset(this.invoice.assetName, this.invoice.assetCount, this.invoice.assetUnit, this.invoice.assetUnitPrice);
-    console.log(this.invoice.dateOfIssue);
     let assets = [asset];
 
     let invoice = new InvoiceExport(
@@ -72,7 +71,8 @@ export class InvoiceDetailComponent implements OnInit {
       this.mapDate(this.invoice.dateOfIssue),
       this.mapDate(this.invoice.deliveryDate),
       this.mapDate(this.invoice.dueDate),
-      assets);
+      assets,
+      this.invoice.note);
 
     console.log(invoice);
 
